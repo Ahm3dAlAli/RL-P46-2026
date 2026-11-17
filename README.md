@@ -8,10 +8,15 @@ py -m venv .venv
 .venv\Scripts\activate
 ```
 \
-Install all dependencies (gymnasium[mujoco], numpy, torch)
+Install all dependencies (gymnasium[mujoco], numpy, torch, matplotlib)
 ```
-pip install gymnasium[mujoco] numpy torch
+pip install gymnasium[mujoco] numpy torch matplotlib
 ```
+Run a .sh file:
+1. open git bash
+2. navigate to the folder of the programming environment (u can go back with cd .. all the way to /d or /c)
+3. run: source .venv/Scripts/activate
+4. run: ./run_experiments.sh
 ### Usage
 The paper results can be reproduced by running:
 ```

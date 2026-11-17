@@ -55,19 +55,24 @@ if __name__ == "__main__":
 	parser.add_argument("--policy_freq", default=2, type=int)       # Frequency of delayed policy updates
 	parser.add_argument("--save_model", action="store_true")        # Save model and optimizer parameters
 	parser.add_argument("--load_model", default="")                 # Model load file name, "" doesn't load, "default" uses file_name
+	parser.add_argument("--torch_threads", default=1, type=int)     # new
 	args = parser.parse_args()
+	# new
+	torch.set_num_threads(args.torch_threads)
+	torch.set_num_interop_threads(1)
 
 	file_name = f"{args.policy}_{args.env}_{args.seed}"
 	print("---------------------------------------")
 	print(f"Policy: {args.policy}, Env: {args.env}, Seed: {args.seed}")
 	print("---------------------------------------")
 
-	if not os.path.exists("./results"):
-		os.makedirs("./results")
-
-	if args.save_model and not os.path.exists("./models"):
-		os.makedirs("./models")
-
+	#if not os.path.exists("./results"):
+	#	os.makedirs("./results")
+	os.makedirs("./results", exist_ok=True) # new
+	#if args.save_model and not os.path.exists("./models"):
+	#	os.makedirs("./models")
+	if args.save_model: # new
+		os.makedirs("./models", exist_ok=True)
 	env = gym.make(args.env)
 
 	# Set seeds
